@@ -1,4 +1,4 @@
-package com.bdpanajoto.hibernate_example;
+package com.bdpanajoto.hibernate_example.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

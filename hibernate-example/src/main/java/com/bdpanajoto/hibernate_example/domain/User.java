@@ -1,4 +1,4 @@
-package com.bdpanajoto.hibernate_example;
+package com.bdpanajoto.hibernate_example.domain;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import com.bdpanajoto.hibernate_example.domain.Group;
+import com.bdpanajoto.hibernate_example.domain.User;
+
 public class App {
 	public static void main(String[] args) {
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();

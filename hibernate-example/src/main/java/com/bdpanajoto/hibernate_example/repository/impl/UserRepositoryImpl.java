@@ -1,6 +1,7 @@
-package com.bdpanajoto.hibernate_example.repository;
+package com.bdpanajoto.hibernate_example.repository.impl;
 
 import com.bdpanajoto.hibernate_example.domain.User;
+import com.bdpanajoto.hibernate_example.repository.UserRepository;
 
 public class UserRepositoryImpl implements UserRepository {
 

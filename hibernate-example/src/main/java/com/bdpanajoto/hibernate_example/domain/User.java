@@ -51,6 +51,14 @@ public class User implements Identifiable {
 	@JoinColumn(name = "user_id")
 	private List<Plot> plots = new ArrayList<>();
 
+	public List<Plot> getPlots() {
+		return plots;
+	}
+
+	public void setPlots(List<Plot> plots) {
+		this.plots = plots;
+	}
+
 	public String getEmail() {
 		return email;
 	}

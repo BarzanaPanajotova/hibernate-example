@@ -18,8 +18,7 @@ public abstract class AbstractHibernateRepository<T extends Identifiable> implem
 
 	@Override
 	public T create(T element) {
-		entityManager.persist(element);
-		return element;
+		return entityManager.merge(element);
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public abstract class AbstractHibernateRepository<T extends Identifiable> implem
 
 	@Override
 	public boolean update(Long id, T updated) {
-		// TODO Auto-generated method stub
+		entityManager.merge(updated);
 		return false;
 	}
 

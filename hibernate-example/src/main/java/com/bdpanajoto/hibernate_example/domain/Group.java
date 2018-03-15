@@ -3,6 +3,7 @@ package com.bdpanajoto.hibernate_example.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "groups")
-public class Group implements Identifiable{
+public class Group implements Identifiable {
 
 	@Id
 	@SequenceGenerator(name = "group_seq", sequenceName = "group_seq", allocationSize = 1)
@@ -24,16 +25,8 @@ public class Group implements Identifiable{
 	@Column
 	private String name;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="groups", cascade = CascadeType.ALL)
 	private List<User> users = new ArrayList<>();
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
 
 	public Long getId() {
 		return id;
@@ -49,6 +42,14 @@ public class Group implements Identifiable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override

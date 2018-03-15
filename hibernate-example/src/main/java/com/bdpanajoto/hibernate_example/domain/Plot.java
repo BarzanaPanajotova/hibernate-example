@@ -32,6 +32,11 @@ public class Plot implements Identifiable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -54,11 +59,6 @@ public class Plot implements Identifiable {
 
 	public void setCulture(String culture) {
 		this.culture = culture;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	@Override

@@ -24,25 +24,28 @@ public abstract class AbstractHibernateRepository<T extends Identifiable> implem
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
+		Optional<T> entity = findById(id);
+		if (entity.isPresent()) {
+			entityManager.remove(entity);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public List<T> findAll() {
-		javax.persistence.Query query2 = entityManager.createQuery("select u from " + getClassType() + " u");
+		javax.persistence.Query query2 = entityManager.createQuery("select u from " + getClassType().getName() + " u");
 
 		@SuppressWarnings("unchecked")
 		List<T> list = query2.getResultList();
 		return list;
 	}
 
-	abstract String getClassType();
+	abstract Class<T> getClassType();
 
 	@Override
 	public Optional<T> findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return Optional.ofNullable(entityManager.find(getClassType(), id));
 	}
 
 	@Override

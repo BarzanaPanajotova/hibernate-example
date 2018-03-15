@@ -17,8 +17,8 @@ public class PlotRepositoryImpl extends AbstractHibernateRepository<Plot> {
 	}
 
 	@Override
-	String getClassType() {
-		return Plot.class.getName();
+	Class<Plot> getClassType() {
+		return Plot.class;
 	}
 
 }

@@ -42,7 +42,9 @@ public class User implements Identifiable {
 	private char[] password;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "ID"))
+	@JoinTable(name = "user_group", 
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "ID"))
 	private List<Group> groups = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -112,6 +114,6 @@ public class User implements Identifiable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", age=" + age + ", username=" + username
-				+ ", password=" + Arrays.toString(password) + ", groups=" + groups + ", plots=" + plots + "]";
+				+ ", password=" + Arrays.toString(password) + "]";
 	}
 }

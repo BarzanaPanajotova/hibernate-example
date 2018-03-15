@@ -17,8 +17,8 @@ public class GroupRepositoryImpl extends AbstractHibernateRepository<Group> {
 	}
 
 	@Override
-	String getClassType() {
-		return Group.class.getName();
+	Class<Group> getClassType() {
+		return Group.class;
 	}
 
 

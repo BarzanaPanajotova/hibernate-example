@@ -17,8 +17,8 @@ public class UserRepositoryImpl extends AbstractHibernateRepository<User> {
 	}
 
 	@Override
-	String getClassType() {
-		return User.class.getName();
+	Class<User> getClassType() {
+		return User.class;
 	}
 
 }

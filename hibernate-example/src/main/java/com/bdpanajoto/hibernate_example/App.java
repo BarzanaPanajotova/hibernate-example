@@ -2,8 +2,8 @@ package com.bdpanajoto.hibernate_example;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import com.bdpanajoto.hibernate_example.domain.User;
 import com.bdpanajoto.hibernate_example.repository.Repository;
@@ -11,10 +11,11 @@ import com.bdpanajoto.hibernate_example.repository.impl.UserRepositoryImpl;
 
 public class App {
 	public static void main(String[] args) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
+		EntityManager entityManager = HibernateUtil.getSessionFactory().openSession();
 
-		Repository<User> userRepo = new UserRepositoryImpl(session);
+		EntityTransaction tr = entityManager.getTransaction();
+		tr.begin();
+		Repository<User> userRepo = new UserRepositoryImpl(entityManager);
 
 		User user = new User();
 		user.setName("test");
@@ -23,7 +24,8 @@ public class App {
 		List<User> users = userRepo.findAll();
 		users.forEach(System.out::println);
 
-		session.close();
-		sf.close();
+		tr.commit();
+		entityManager.close();
+		HibernateUtil.closeSessionFactory();
 	}
 }

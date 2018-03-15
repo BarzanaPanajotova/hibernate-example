@@ -3,26 +3,22 @@ package com.bdpanajoto.hibernate_example.repository.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import javax.persistence.EntityManager;
 
 import com.bdpanajoto.hibernate_example.domain.Identifiable;
 import com.bdpanajoto.hibernate_example.repository.Repository;
 
 public abstract class AbstractHibernateRepository<T extends Identifiable> implements Repository<T> {
 
-	private Session session;
+	private EntityManager entityManager;
 
-	public AbstractHibernateRepository(Session session) {
-		this.session = session;
+	public AbstractHibernateRepository(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 	@Override
 	public T create(T element) {
-		Transaction transaction = session.beginTransaction();
-		session.save(element);
-		transaction.commit();
+		entityManager.persist(element);
 		return element;
 	}
 
@@ -34,10 +30,10 @@ public abstract class AbstractHibernateRepository<T extends Identifiable> implem
 
 	@Override
 	public List<T> findAll() {
+		javax.persistence.Query query2 = entityManager.createQuery("select u from " + getClassType() + " u");
+
 		@SuppressWarnings("unchecked")
-		Query<T> query2 = session.createQuery("select u from " + getClassType() + " u");
-		
-		List<T> list = query2.list();
+		List<T> list = query2.getResultList();
 		return list;
 	}
 

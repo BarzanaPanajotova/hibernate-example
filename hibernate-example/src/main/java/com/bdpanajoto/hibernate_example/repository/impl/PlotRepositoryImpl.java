@@ -1,13 +1,13 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
 
 import com.bdpanajoto.hibernate_example.domain.Plot;
 
 public class PlotRepositoryImpl extends AbstractHibernateRepository<Plot> {
 
-	public PlotRepositoryImpl(Session session) {
-		super(session);
+	public PlotRepositoryImpl(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 	@Override

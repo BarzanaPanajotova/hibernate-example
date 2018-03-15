@@ -1,13 +1,13 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
 
 import com.bdpanajoto.hibernate_example.domain.User;
 
 public class UserRepositoryImpl extends AbstractHibernateRepository<User> {
 
-	public UserRepositoryImpl(Session session) {
-		super(session);
+	public UserRepositoryImpl(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 	@Override

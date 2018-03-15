@@ -1,13 +1,13 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
 
 import com.bdpanajoto.hibernate_example.domain.Group;
 
 public class GroupRepositoryImpl extends AbstractHibernateRepository<Group> {
 
-	public GroupRepositoryImpl(Session session) {
-		super(session);
+	public GroupRepositoryImpl(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 	@Override

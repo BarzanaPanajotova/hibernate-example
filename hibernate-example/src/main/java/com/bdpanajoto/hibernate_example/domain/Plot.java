@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "plots")
-public class Plot {
+public class Plot implements Identifiable {
 
 	@Id
 	@SequenceGenerator(name = "plot_seq", sequenceName = "plot_seq", allocationSize = 1)
@@ -27,9 +27,9 @@ public class Plot {
 
 	@Column
 	private String culture;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public String getName() {
@@ -54,6 +54,17 @@ public class Plot {
 
 	public void setCulture(String culture) {
 		this.culture = culture;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Plot [id=" + id + ", name=" + name + ", coordinates=" + coordinates + ", culture=" + culture + ", user="
+				+ user + "]";
 	}
 
 }

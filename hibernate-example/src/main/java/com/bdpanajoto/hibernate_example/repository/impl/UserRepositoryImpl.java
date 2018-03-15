@@ -1,20 +1,24 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
+import org.hibernate.Session;
+
 import com.bdpanajoto.hibernate_example.domain.User;
-import com.bdpanajoto.hibernate_example.repository.UserRepository;
 
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl extends AbstractHibernateRepository<User> {
 
-	@Override
-	public User save(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserRepositoryImpl(Session session) {
+		super(session);
 	}
 
 	@Override
-	public void delete(User user) {
+	protected void updateIfExists(User original, User desired) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	String getClassType() {
+		return User.class.getName();
 	}
 
 }

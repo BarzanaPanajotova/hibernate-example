@@ -1,6 +1,7 @@
 package com.bdpanajoto.hibernate_example.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Identifiable {
 
 	@Id
 	@GeneratedValue(generator = "user_seq", strategy = GenerationType.SEQUENCE)
@@ -106,5 +107,11 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", age=" + age + ", username=" + username
+				+ ", password=" + Arrays.toString(password) + ", groups=" + groups + ", plots=" + plots + "]";
 	}
 }

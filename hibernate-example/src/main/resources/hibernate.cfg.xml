@@ -15,9 +15,9 @@
 		<!--  --><property name="hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
 
-		<mapping class="com.bdpanajoto.hibernate_example.User" />
-		<mapping class="com.bdpanajoto.hibernate_example.Group" />
-		<mapping class="com.bdpanajoto.hibernate_example.Plot" />
+		<mapping class="com.bdpanajoto.hibernate_example.domain.User" />
+		<mapping class="com.bdpanajoto.hibernate_example.domain.Group" />
+		<mapping class="com.bdpanajoto.hibernate_example.domain.Plot" />
 	</session-factory>
 
 </hibernate-configuration>

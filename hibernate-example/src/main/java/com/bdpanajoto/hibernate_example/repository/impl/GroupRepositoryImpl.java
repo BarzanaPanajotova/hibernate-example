@@ -1,20 +1,25 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
+import org.hibernate.Session;
+
 import com.bdpanajoto.hibernate_example.domain.Group;
-import com.bdpanajoto.hibernate_example.repository.GroupRepository;
 
-public class GroupRepositoryImpl implements GroupRepository {
+public class GroupRepositoryImpl extends AbstractHibernateRepository<Group> {
 
-	@Override
-	public Group save(Group group) {
-		// TODO Auto-generated method stub
-		return null;
+	public GroupRepositoryImpl(Session session) {
+		super(session);
 	}
 
 	@Override
-	public void delete(Group group) {
+	protected void updateIfExists(Group original, Group desired) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	@Override
+	String getClassType() {
+		return Group.class.getName();
+	}
+
 
 }

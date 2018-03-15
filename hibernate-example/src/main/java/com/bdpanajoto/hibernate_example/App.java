@@ -4,39 +4,24 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
-import com.bdpanajoto.hibernate_example.domain.Group;
 import com.bdpanajoto.hibernate_example.domain.User;
+import com.bdpanajoto.hibernate_example.repository.Repository;
+import com.bdpanajoto.hibernate_example.repository.impl.UserRepositoryImpl;
 
 public class App {
 	public static void main(String[] args) {
-		SessionFactory sf = new Configuration().configure().buildSessionFactory();
+		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		Transaction t = session.beginTransaction();
 
-		User te = new User();
-		te.setName("test");
-		session.save(te);
-		t.commit();
+		Repository<User> userRepo = new UserRepositoryImpl(session);
 
-		@SuppressWarnings("unchecked")
-		Query<User> query = session.createQuery("select u from User u");
-		List<User> users = query.list();
-		users.forEach(x -> System.out.println(x.getId() + " " + x.getName()));
+		User user = new User();
+		user.setName("test");
+		userRepo.create(user);
 
-		t = session.beginTransaction();
-		Group group = new Group();
-		group.setName("administrator");
-		group.getUsers().add(te);
-		session.save(group);
-
-		@SuppressWarnings("unchecked")
-		Query<Group> query2 = session.createQuery("select u from Group u");
-		List<Group> groups = query2.list();
-		groups.forEach(x -> System.out.println(x.getId() + " " + x.getName()));
+		List<User> users = userRepo.findAll();
+		users.forEach(System.out::println);
 
 		session.close();
 		sf.close();

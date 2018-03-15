@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "groups")
-public class Group {
+public class Group implements Identifiable{
 
 	@Id
 	@SequenceGenerator(name = "group_seq", sequenceName = "group_seq", allocationSize = 1)
@@ -49,6 +49,11 @@ public class Group {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", name=" + name + ", users=" + users + "]";
 	}
 
 }

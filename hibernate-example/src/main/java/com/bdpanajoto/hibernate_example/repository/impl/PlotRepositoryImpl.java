@@ -1,20 +1,24 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
+import org.hibernate.Session;
+
 import com.bdpanajoto.hibernate_example.domain.Plot;
-import com.bdpanajoto.hibernate_example.repository.PlotRepository;
 
-public class PlotRepositoryImpl implements PlotRepository {
+public class PlotRepositoryImpl extends AbstractHibernateRepository<Plot> {
 
-	@Override
-	public Plot save(Plot plot) {
-		// TODO Auto-generated method stub
-		return null;
+	public PlotRepositoryImpl(Session session) {
+		super(session);
 	}
 
 	@Override
-	public void delete(Plot plot) {
+	protected void updateIfExists(Plot original, Plot desired) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	String getClassType() {
+		return Plot.class.getName();
 	}
 
 }

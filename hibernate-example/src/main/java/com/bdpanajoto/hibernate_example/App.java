@@ -2,7 +2,6 @@ package com.bdpanajoto.hibernate_example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -53,7 +52,10 @@ public class App {
 		groups.forEach(System.out::println);
 
 		System.out.println("PRINT ALL USER GROUPS");
-		users.forEach(x -> x.getGroups().forEach(System.out::println));
+		users.forEach(x -> {
+			System.out.println(x);
+			x.getGroups().forEach(System.out::println);
+		});
 
 		tr.commit();
 		entityManager.close();

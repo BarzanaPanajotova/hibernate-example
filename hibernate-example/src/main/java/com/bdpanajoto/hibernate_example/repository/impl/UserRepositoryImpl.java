@@ -20,5 +20,4 @@ public class UserRepositoryImpl extends AbstractHibernateRepository<User> {
 	Class<User> getClassType() {
 		return User.class;
 	}
-
 }

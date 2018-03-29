@@ -18,4 +18,6 @@ public interface Repository<T> {
 	void clear();
 
 	boolean update(Long id, T updated);
+
+	void printAll();
 }

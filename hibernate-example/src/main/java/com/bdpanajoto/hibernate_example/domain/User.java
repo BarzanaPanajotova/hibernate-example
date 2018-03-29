@@ -122,6 +122,6 @@ public class User implements Identifiable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", age=" + age + ", username=" + username
-				+ ", password=" + Arrays.toString(password) + "]";
+				+ ", password=" + Arrays.toString(password) +", groups="+ groups+ "]";
 	}
 }

@@ -25,7 +25,7 @@ public class Group implements Identifiable {
 	@Column
 	private String name;
 
-	@ManyToMany(mappedBy="groups", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "groups", cascade = CascadeType.ALL)
 	private List<User> users = new ArrayList<>();
 
 	public Long getId() {
@@ -54,7 +54,11 @@ public class Group implements Identifiable {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", users=" + users + "]";
+		String str = "Group [id=" + id + ", name=" + name+", users=[";
+		for (User user : users) {
+			str += user.getName() + ", ";
+		}
+		return str+="] ]";
 	}
 
 }

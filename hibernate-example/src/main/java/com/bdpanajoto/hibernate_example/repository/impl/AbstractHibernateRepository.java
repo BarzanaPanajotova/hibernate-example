@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 
 import com.bdpanajoto.hibernate_example.domain.Identifiable;
+import com.bdpanajoto.hibernate_example.domain.User;
 import com.bdpanajoto.hibernate_example.repository.Repository;
 
 public abstract class AbstractHibernateRepository<T extends Identifiable> implements Repository<T> {
@@ -66,4 +67,10 @@ public abstract class AbstractHibernateRepository<T extends Identifiable> implem
 	}
 
 	protected abstract void updateIfExists(T original, T desired);
+
+	@Override
+	public void printAll() {
+		System.out.println("PRINT ALL " + getClassType().getSimpleName());
+		findAll().forEach(System.out::println);
+	}
 }

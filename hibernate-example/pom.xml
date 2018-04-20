@@ -52,7 +52,17 @@
 				<version>5.0.7</version>
 				<configuration>
 					<url>jdbc:derby:.\\db\\testdb.db;create=true</url>
+					<baselineOnMigrate>true</baselineOnMigrate>
 				</configuration>
+				<executions>
+					<execution>
+						<id>flyway</id>
+						<phase>package</phase>
+						<goals>
+							<goal>migrate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

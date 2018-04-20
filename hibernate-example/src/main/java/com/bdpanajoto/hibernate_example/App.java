@@ -27,32 +27,22 @@ public class App {
 		Repository<Group> groupRepo = new GroupRepositoryImpl(entityManager);
 
 		try {
-			
+
 			User user = createUser();
 			tr.begin();
 			user = userRepo.create(user);
-
 			Group group = createGroup(user);
-			groupRepo.create(group);
-
-			addGroupToUser(user, group);
+			user.getGroups().add(group);
 			userRepo.update(user.getId(), user);
 			tr.commit();
 
-			
 			userRepo.printAll();
 			groupRepo.printAll();
-			
+
 		} finally {
 			entityManager.close();
 			HibernateUtil.closeSessionFactory();
 		}
-	}
-
-	private static void addGroupToUser(User user, Group group) {
-		List<Group> userGroups = new ArrayList<>();
-		userGroups.add(group);
-		user.setGroups(userGroups);
 	}
 
 	private static Group createGroup(User user) {

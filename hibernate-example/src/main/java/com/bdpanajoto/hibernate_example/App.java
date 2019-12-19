@@ -1,20 +1,13 @@
 package com.bdpanajoto.hibernate_example;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
-import org.beryx.textio.InputReader.ValueChecker;
-import org.beryx.textio.TextIO;
-import org.beryx.textio.TextIoFactory;
-
 import com.bdpanajoto.hibernate_example.domain.Group;
 import com.bdpanajoto.hibernate_example.domain.User;
 import com.bdpanajoto.hibernate_example.repository.Repository;
 import com.bdpanajoto.hibernate_example.repository.impl.GroupRepositoryImpl;
 import com.bdpanajoto.hibernate_example.repository.impl.UserRepositoryImpl;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 public class App {
 	public static void main(String[] args) throws InterruptedException {
@@ -29,10 +22,17 @@ public class App {
 		try {
 
 			User user = createUser();
+			Group group = createGroup();
+
 			tr.begin();
 			user = userRepo.create(user);
-			Group group = createGroup(user);
+			group = groupRepo.create(group);
+			tr.commit();
+			tr.begin();
+			/* Two way association */
+			group.getUsers().add(user);
 			user.getGroups().add(group);
+
 			userRepo.update(user.getId(), user);
 			tr.commit();
 
@@ -45,31 +45,19 @@ public class App {
 		}
 	}
 
-	private static Group createGroup(User user) {
+	private static Group createGroup() {
 		Group group = new Group();
 		group.setName("Administrators");
-		group.getUsers().add(user);
 		return group;
 	}
 
 	private static User createUser() {
-		TextIO textIO = TextIoFactory.getTextIO();
-
 		User user = new User();
-		user.setName(textIO.newStringInputReader().read("Name"));
-		user.setAge(textIO.newIntInputReader().withMinVal(18).read("Age"));
-		ValueChecker<String> emaiChecker = (email, name) -> {
-			List<String> validationErrors = new ArrayList<>();
-			if (!email.contains("@"))
-				validationErrors.add("This is not a valid e-mail!");
-			return validationErrors;
-		};
-		user.setEmail(textIO.newStringInputReader().withValueChecker(emaiChecker).read("e-mail"));
-		user.setUsername(textIO.newStringInputReader().read("Username"));
-		user.setPassword(
-				textIO.newStringInputReader().withMinLength(6).withInputMasking(true).read("Password").toCharArray());
-		textIO.dispose();
-
+		user.setName("Name");
+		user.setAge(18);
+		user.setEmail("e-mail");
+		user.setUsername("Username");
+		user.setPassword("Password".toCharArray());
 		return user;
 	}
 }

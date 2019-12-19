@@ -7,14 +7,15 @@ import com.bdpanajoto.hibernate_example.repository.impl.GroupRepositoryImpl;
 import com.bdpanajoto.hibernate_example.repository.impl.UserRepositoryImpl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 public class App {
-	public static void main(String[] args) throws InterruptedException {
-
-		EntityManager entityManager = HibernateUtil.getSessionFactory().openSession();
-
-		EntityTransaction tr = entityManager.getTransaction();
+	public void main(String[] args) {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.bdpanajoto.hibernate_example.JPAPersistence");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
 
 		Repository<User> userRepo = new UserRepositoryImpl(entityManager);
 		Repository<Group> groupRepo = new GroupRepositoryImpl(entityManager);
@@ -24,24 +25,22 @@ public class App {
 			User user = createUser();
 			Group group = createGroup();
 
-			tr.begin();
+			entityTransaction.begin();
 			user = userRepo.create(user);
 			group = groupRepo.create(group);
-			tr.commit();
-			tr.begin();
 			/* Two way association */
 			group.getUsers().add(user);
 			user.getGroups().add(group);
 
 			userRepo.update(user.getId(), user);
-			tr.commit();
+			entityTransaction.commit();
 
 			userRepo.printAll();
 			groupRepo.printAll();
 
 		} finally {
 			entityManager.close();
-			HibernateUtil.closeSessionFactory();
+			entityManagerFactory.close();
 		}
 	}
 

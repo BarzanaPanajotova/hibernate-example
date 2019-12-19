@@ -1,25 +1,19 @@
 package com.bdpanajoto.hibernate_example.repository.impl;
 
-import javax.persistence.EntityManager;
-
 import com.bdpanajoto.hibernate_example.domain.Group;
 
-public class GroupRepositoryImpl extends AbstractHibernateRepository<Group> {
+import javax.persistence.EntityManager;
 
-	public GroupRepositoryImpl(EntityManager entityManager) {
-		super(entityManager);
-	}
+public class GroupRepositoryImpl extends AbstractRepository<Group> {
 
-	@Override
-	protected void updateIfExists(Group original, Group desired) {
-		// TODO Auto-generated method stub
-		
-	}
+    public GroupRepositoryImpl(EntityManager entityManager) {
+        super(entityManager);
+    }
 
-	@Override
-	Class<Group> getClassType() {
-		return Group.class;
-	}
 
+    @Override
+    Class<Group> getClassType() {
+        return Group.class;
+    }
 
 }

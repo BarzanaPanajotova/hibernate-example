@@ -10,10 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.transaction.UserTransaction;
 
 public class App {
-	public void main(String[] args) {
+	public static void main(String[] args) {
+
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.bdpanajoto.hibernate_example.JPAPersistence");
+
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 
@@ -32,7 +35,6 @@ public class App {
 			group.getUsers().add(user);
 			user.getGroups().add(group);
 
-			userRepo.update(user.getId(), user);
 			entityTransaction.commit();
 
 			userRepo.printAll();

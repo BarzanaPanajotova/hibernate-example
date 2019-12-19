@@ -7,15 +7,9 @@ public interface Repository<T> {
 
 	T create(T element);
 
-	boolean delete(Long id);
-
 	List<T> findAll();
 
 	Optional<T> findById(Long id);
-
-	int getCount();
-
-	void clear();
 
 	boolean update(Long id, T updated);
 
